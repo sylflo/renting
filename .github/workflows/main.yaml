@@ -56,6 +56,15 @@ jobs:
 
   hadolint-admin:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./admin/Dockerfile
+  
+  unittest-backend:
+    # TODO cache node_modules
+    runs-on: ubuntu-latest
     services:
       postgres:
         image: postgres
@@ -73,14 +82,6 @@ jobs:
       LANDLORD_LAST_NAME: "Doe"
       PHONE: "+3365861456"
       MAX_PERSONS: 4
-    steps:
-      - uses: actions/checkout@v2
-      - uses: brpaz/hadolint-action@v1.2.1
-        with:
-          dockerfile: ./admin/Dockerfile
-  
-  unittest-backend:
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run unit tests
