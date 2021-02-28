@@ -56,6 +56,14 @@ jobs:
 
   hadolint-admin:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: rentingtest
+          POSTGRES_USER: rentingtest
+          POSTGRES_DB: rentingtest
+          DATABASE_DATA: postgresql://rentingtest:rentingtest@postgres/rentingtest
     steps:
       - uses: actions/checkout@v2
       - uses: brpaz/hadolint-action@v1.2.1
