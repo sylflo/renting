@@ -63,7 +63,6 @@ jobs:
           dockerfile: ./admin/Dockerfile
   
   unittest-backend:
-    # TODO cache node_modules
     runs-on: ubuntu-latest
     container: node:15.7.0-alpine3.12
     services:
@@ -81,6 +80,7 @@ jobs:
     env:
       DATABASE_DATA: postgresql://rentingtest:rentingtest@postgres/rentingtest
       BASE_DIR: /__w/renting/renting/backend
+      STRIPE_SK: ${{ secrets.STRIPE_SK }}
       BRAND_NAME: "My brand"
       RENTING_ADDRESS: "Emile Zola, 75003 Paris"
       LANDLORD_NAME: "John Doe"
