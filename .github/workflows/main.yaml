@@ -17,8 +17,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - name: Run a multi-line script
         run: |
           cd backend
+          npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
           eslint ./src --ext .js,.jsx,.ts,.tsx
