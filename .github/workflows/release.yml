@@ -48,10 +48,10 @@ jobs:
         with:
           context: .
           file: './backend/Dockerfile'
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           cache-from: type=local,src=/tmp/.buildx-cache-backend
           cache-to: type=local,dest=/tmp/.buildx-cache-backend
-          tags: sylflo/renting-backend:latest
+          tags: ${{ steps.prep.outputs.tags }}
 
 
   build-and-push-docker-admin:
@@ -81,7 +81,7 @@ jobs:
         with:
           context: .
           file: './admin/Dockerfile'
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           cache-from: type=local,src=/tmp/.buildx-cache-admin
           cache-to: type=local,dest=/tmp/.buildx-cache-admin
           tags: sylflo/renting-admin:latest
