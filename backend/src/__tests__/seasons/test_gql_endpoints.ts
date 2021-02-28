@@ -48,6 +48,7 @@ afterAll(async () => {
       id: rate.id,
     },
   })
+  await prisma.$disconnect()
 })
 
 describe('it verifies create season endpoint', () => {

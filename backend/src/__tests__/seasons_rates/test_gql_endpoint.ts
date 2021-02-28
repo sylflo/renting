@@ -10,6 +10,10 @@ import {
 const stripe = require('stripe')(process.env.STRIPE_SK)
 let rateId = -1
 
+afterAll(async () => {
+  await prisma.$disconnect()
+})
+
 describe('Season Rate endpoint', () => {
   it('creates a season rate and new stripe product and price', async () => {
     const res = await mutate({
