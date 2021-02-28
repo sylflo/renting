@@ -1,7 +1,5 @@
 FROM node:15.3.0-alpine3.10
 
-WORKDIR /app
-
 ENV NODE_ENV production
 
 # hadolint ignore=DL3018
@@ -26,6 +24,8 @@ RUN pip3 --no-cache-dir install wheel
 # hadolint ignore=DL3013
 RUN pip3 --no-cache-dir install WeasyPrint
 
+WORKDIR /app
+
 COPY ./backend/package*.json ./
 RUN npm i
 
@@ -36,6 +36,11 @@ COPY ./backend/emails ./emails
 COPY ./backend/files ./files
 COPY ./backend/prisma ./prisma
 COPY ./backend/tsconfig.json ./
+
+WORKDIR /app/src/common
+RUN npm i
+
+WORKDIR /app
 RUN npm run build
 
 
