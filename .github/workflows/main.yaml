@@ -73,3 +73,4 @@ jobs:
           cd ../backend
           npm i
           npm run build
+          node_modules/prisma/build/index.js migrate deploy --preview-feature
