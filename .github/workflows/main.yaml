@@ -56,3 +56,11 @@ jobs:
       - uses: brpaz/hadolint-action@v1.2.1
         with:
           dockerfile: ./backend/Dockerfile
+
+  hadolint-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./admin/Dockerfile
