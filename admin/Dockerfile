@@ -3,7 +3,6 @@ FROM node:15.3.0-alpine3.10 as build-stage
 WORKDIR /app
 
 ENV NODE_ENV production
-# ENV REACT_APP_SENTRY_DSN "https://41f168372f7e4b35a6498503e8777389@o259953.ingest.sentry.io/5610755"
 
 COPY admin/package*.json ./
 RUN npm i
