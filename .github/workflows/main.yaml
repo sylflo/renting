@@ -65,6 +65,7 @@ jobs:
   unittest-backend:
     # TODO cache node_modules
     runs-on: ubuntu-latest
+    container: node:15.7.0-alpine3.12
     services:
       postgres:
         image: postgres
