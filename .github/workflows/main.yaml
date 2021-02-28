@@ -72,6 +72,11 @@ jobs:
           POSTGRES_PASSWORD: rentingtest
           POSTGRES_USER: rentingtest
           POSTGRES_DB: rentingtest
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     env:
       DATABASE_DATA: postgresql://rentingtest:rentingtest@postgres/rentingtest
       # BASE_DIR: /builds/sylflo/renting/backend
