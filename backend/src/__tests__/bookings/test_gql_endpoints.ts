@@ -8,6 +8,10 @@ import {
   MUTATION_BOOKING_STATUS as CHANGE_BOOKING_STATUS,
 } from '../../common/grapql_schemas/booking'
 
+afterAll(async () => {
+  await prisma.$disconnect()
+})
+
 describe('it verifies function used when booking', () => {
   it('checks dates from 2021-01-05 to 2021-01-15 is not booked', async () => {
     const ret = await isBookingAvailable(

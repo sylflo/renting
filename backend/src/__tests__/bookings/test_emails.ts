@@ -31,6 +31,10 @@ beforeAll(async () => {
   )
 })
 
+afterAll(async () => {
+  await prisma.$disconnect()
+})
+
 describe('Testing email templates', () => {
   it('it sends an accept email', async () => {
     const booking = await prisma.booking.findFirst({

@@ -36,6 +36,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await deleteBookingById(prisma, bookingId)
+  await prisma.$disconnect()
 })
 
 describe('sends the deposit', () => {
