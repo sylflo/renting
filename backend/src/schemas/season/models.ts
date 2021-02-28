@@ -161,7 +161,10 @@ const updateBookedSeason = async (
   })
 }
 
-const findSeasonRateByTitle = async (prisma: PrismaClient, name: string) => {
+const findSeasonRateByTitle = async (
+  prisma: PrismaClient,
+  name: string,
+): Promise<SeasonRate | null> => {
   return prisma.seasonRate.findUnique({
     where: {
       name,
@@ -169,7 +172,10 @@ const findSeasonRateByTitle = async (prisma: PrismaClient, name: string) => {
   })
 }
 
-const findSeasonByRateId = async (prisma: PrismaClient, rateId: number) => {
+const findSeasonByRateId = async (
+  prisma: PrismaClient,
+  rateId: number,
+): Promise<Season[]> => {
   return prisma.season.findMany({
     where: {
       seasonRateId: rateId,

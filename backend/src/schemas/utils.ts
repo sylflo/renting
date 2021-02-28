@@ -57,7 +57,7 @@ const pugToHtml = async (
   }
 }
 
-const setToUTCHours = (start: Date, end: Date) => {
+const setToUTCHours = (start: Date, end: Date): [Date, Date] => {
   const startDate = new Date(start)
   const endDate = new Date(end)
   startDate.setUTCHours(0, 0, 0, 0)

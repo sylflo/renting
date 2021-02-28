@@ -88,6 +88,7 @@ const sendDepositOrRemaining = async (
       })
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const invoiceId = await createStripeInvoice(filtered as any, booking)
 
     await updateBookingsStripeId(

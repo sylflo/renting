@@ -93,7 +93,7 @@ const getBookingProducts = async (
 const createStripeInvoice = async (
   items: DeadlineProductRow[],
   booking: BookingWithCustomer,
-) => {
+): Promise<string> => {
   if (!booking.customer.stripeCustomer) {
     throw new Error('Customer was not set on Stripe')
   }
