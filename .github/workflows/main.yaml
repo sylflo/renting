@@ -12,13 +12,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  eslint-backend:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Run a multi-line script
+      - name: Runs eslint
         run: |
           cd backend
           npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
-          npx eslint ./src --ext .js,.jsx,.ts,.tsx
+          node_modules/eslint/bin/eslint.js ./src --ext .js,.jsx,.ts,.tsx
+  # eslint-admin:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+  #     - uses: actions/checkout@v2
+  #     - name: Runs eslint
+  #       run: |
+  #         cd admin
+  #         npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+  #         npx eslint ./src --ext .js,.jsx,.ts,.tsx
