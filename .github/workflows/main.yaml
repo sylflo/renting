@@ -100,4 +100,4 @@ jobs:
           node_modules/prisma/build/index.js migrate deploy --preview-feature
           pwd
           node ./dist/commands/admin.js "test@test.fr" "test" "test"
-          npm run test customers
+          npm run test customers products seasons_rates seasons
