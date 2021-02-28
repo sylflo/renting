@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:15.7.0-alpine3.12
-      # volumes:
-      #   - /tmp/booking/:/
+      volumes:
+        - /tmp/backend/:/renting/renting/backend
     services:
       postgres:
         image: postgres
