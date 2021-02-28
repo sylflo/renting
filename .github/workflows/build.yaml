@@ -15,6 +15,13 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache-backend
+          key: ${{ runner.os }}-buildx-backend-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-backend
       -
         name: Build
         id: docker_build
@@ -22,6 +29,8 @@ jobs:
         with:
           context: .
           file: './backend/Dockerfile'
+          cache-from: type=local,src=/tmp/.buildx-cache-backend
+          cache-to: type=local,dest=/tmp/.buildx-cache-backend
           push: false
 
   build-docker-admin:
@@ -31,6 +40,13 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache-admin
+          key: ${{ runner.os }}-buildx-admin-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-admin
       -
         name: Build
         id: docker_build
@@ -38,4 +54,6 @@ jobs:
         with:
           context: .
           file: './admin/Dockerfile'
+          cache-from: type=local,src=/tmp/.buildx-cache-admin
+          cache-to: type=local,dest=/tmp/.buildx-cache-admin
           push: false

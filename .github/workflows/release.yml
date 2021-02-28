@@ -20,6 +20,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache-backend
+          key: ${{ runner.os }}-buildx-backend-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-backend
       -
         name: Build
         id: docker_build
@@ -28,7 +35,9 @@ jobs:
           context: .
           file: './backend/Dockerfile'
           push: true
-          tags: sylflo/renting-backend:latest
+          cache-from: type=local,src=/tmp/.buildx-cache-backend
+          cache-to: type=local,dest=/tmp/.buildx-cache-backend
+          tags: sylflo/renting-backend:latest # TODO target releaae
 
 
   build-and-push-docker-admin:
@@ -44,6 +53,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache-admin
+          key: ${{ runner.os }}-buildx-admin-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-admin
       -
         name: Build 
         id: docker_build
@@ -52,4 +68,6 @@ jobs:
           context: .
           file: './admin/Dockerfile'
           push: true
-          tags: sylflo/renting-admin:latest
+          cache-from: type=local,src=/tmp/.buildx-cache-admin
+          cache-to: type=local,dest=/tmp/.buildx-cache-admin
+          tags: sylflo/renting-admin:latest # TODO target release
