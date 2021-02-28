@@ -7,11 +7,62 @@ on:
     branches: [ "**" ]
   pull_request:
     branches: [ "**" ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
 jobs:
+  eslint-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs eslint
+        run: |
+          cd backend
+          npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+          npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
+  eslint-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs eslint
+        run: |
+          cd admin
+          npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+          npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
+
+  prettier-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs prettier
+        run: |
+          cd backend
+          npx prettier --check ./src
+
+  prettier-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs prettier
+        run: |
+          cd admin
+          npx prettier --check ./src
+
+  hadolint-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./backend/Dockerfile
+
+  hadolint-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./admin/Dockerfile
+
   # build-docker-backend:
   #   runs-on: ubuntu-latest
   #   steps:
@@ -45,56 +96,3 @@ jobs:
   #         file: './admin/Dockerfile'
   #         push: false
   #         tags: sylflo/renting-admin:latest
-
-  # eslint-backend:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Runs eslint
-  #       run: |
-  #         cd backend
-  #         npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
-  #         npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
-  # eslint-admin:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Runs eslint
-  #       run: |
-  #         cd admin
-  #         npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
-  #         npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
-
-  # prettier-backend:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Runs prettier
-  #       run: |
-  #         cd backend
-  #         npx prettier --check ./src
-
-  # prettier-admin:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Runs prettier
-  #       run: |
-  #         cd admin
-  #         npx prettier --check ./src
-
-  # hadolint-backend:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: brpaz/hadolint-action@v1.2.1
-  #       with:
-  #         dockerfile: ./backend/Dockerfile
-
-  # hadolint-admin:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: brpaz/hadolint-action@v1.2.1
-  #       with:
-  #         dockerfile: ./admin/Dockerfile

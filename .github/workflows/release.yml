@@ -1,5 +1,6 @@
 name: Publish Releases to Docker Hub
 
+# TODO tags test
 on:
   push:
     tags:
