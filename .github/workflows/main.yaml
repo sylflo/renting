@@ -114,6 +114,8 @@ jobs:
             ttf-dejavu \
             postgresql-client \
             nano
+          pip3 --no-cache-dir install wheel
+          pip3 --no-cache-dir install WeasyPrint
           npm i
           npm run build
           node_modules/prisma/build/index.js migrate deploy --preview-feature
