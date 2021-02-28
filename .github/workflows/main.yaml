@@ -21,4 +21,4 @@ jobs:
         run: |
           cd backend
           npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
-          eslint ./src --ext .js,.jsx,.ts,.tsx
+          npx eslint ./src --ext .js,.jsx,.ts,.tsx
