@@ -63,6 +63,16 @@ jobs:
           POSTGRES_PASSWORD: rentingtest
           POSTGRES_USER: rentingtest
           POSTGRES_DB: rentingtest
+    env:
+      DATABASE_DATA: postgresql://rentingtest:rentingtest@postgres/rentingtest
+      # BASE_DIR: /builds/sylflo/renting/backend
+      BRAND_NAME: "My brand"
+      RENTING_ADDRESS: "Emile Zola, 75003 Paris"
+      LANDLORD_NAME: "John Doe"
+      LANDLORD_FIRST_NAME: "John"
+      LANDLORD_LAST_NAME: "Doe"
+      PHONE: "+3365861456"
+      MAX_PERSONS: 4
     steps:
       - uses: actions/checkout@v2
       - uses: brpaz/hadolint-action@v1.2.1
