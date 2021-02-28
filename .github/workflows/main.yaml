@@ -80,7 +80,7 @@ jobs:
           --health-retries 5
     env:
       DATABASE_DATA: postgresql://rentingtest:rentingtest@postgres/rentingtest
-      # BASE_DIR: /builds/sylflo/renting/backend
+      BASE_DIR: /__w/renting/renting/backend
       BRAND_NAME: "My brand"
       RENTING_ADDRESS: "Emile Zola, 75003 Paris"
       LANDLORD_NAME: "John Doe"
@@ -99,3 +99,5 @@ jobs:
           npm run build
           node_modules/prisma/build/index.js migrate deploy --preview-feature
           pwd
+          node ./dist/commands/admin.js "test@test.fr" "test" "test"
+          npm run test customers
