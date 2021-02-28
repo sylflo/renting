@@ -11,8 +11,8 @@ name: build
 #   workflow_dispatch:
 on:
   workflow_run:
-    workflows: [ "CI" ]
-    branches: [ "**" ]
+    workflows: ["CI"]
+    branches: ["**"]
     types: 
       - completed
 jobs:
