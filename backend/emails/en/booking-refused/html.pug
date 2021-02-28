@@ -1,0 +1,10 @@
+
+extends ../shared/body.pug
+
+block title
+  | REFUSAL OF RENTAL
+
+block content
+  p
+    | We regret to inform you that your reservation from #{dayjs(booking.start).format('LL')} to #{dayjs(booking.end).format('LL')} has been refused.
+    br

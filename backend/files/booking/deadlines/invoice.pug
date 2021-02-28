@@ -1,0 +1,57 @@
+doctype html
+head
+  meta(charset='utf-8')
+  link(href='invoice.css' media='print' rel='stylesheet')
+  title Planning
+  meta(name='description' content='Payment deadline')
+  meta(name='author' content="#{brand_name}")
+h1 Planning
+aside
+  address#from
+    | Pegauret
+    | 24260 Saint Chamassy
+    | France
+  address#to
+    | #{customerAddress.line1}
+    | #{customerAddress.line2}
+    | #{customerAddress.postal_code} #{customerAddress.city}
+    | #{customerAddress.country}
+dl#informations
+  dd #{dayjs().format('DD/MM/YYYY')}
+table
+  thead
+    th #{i18n.__('Description')}
+    th #{i18n.__('Price')}
+    th #{i18n.__('Quantity')}
+    th #{i18n.__('Subtotal')}
+    th #{i18n.__('Planning')}
+  tbody
+  each deadline in deadlines
+    tr
+      td= i18n.__(deadline.product.name)
+        |  (#{i18n.__(deadline.type)})
+      td
+        span= (deadline.price.unit_amount / 100)
+        span  &euro;
+      td= deadline.quantity
+      td
+        span= ((deadline.price.unit_amount / 100) * deadline.quantity)
+        span  &euro;
+      td= dayjs(deadline.deadline).format('DD/MM/YYYY')
+  each deadline in otherDeadlines
+    tr
+      td= i18n.__(deadline.product.name)
+      td
+        span= (deadline.stripePrice.unit_amount / 100)
+        span  &euro;
+      td= 1
+      td
+        span= ((deadline.stripePrice.unit_amount / 100) * 1)
+        span  &euro;
+      td= dayjs(deadline.deadline).format('DD/MM/YYYY')
+table#total
+  thead
+    th Total
+  tbody
+    tr
+      td #{totalPrice}&euro;

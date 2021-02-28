@@ -1,0 +1,11 @@
+extends ../shared/body.pug
+
+block title
+  | CONFIRMATION DE LOCATION
+
+block content
+  p
+    | Nous vous confirmons que votre réservation du #{dayjs(booking.start).locale('fr').format('LL')} au #{dayjs(booking.end).locale('fr').format('LL')} a été acceptée.
+    br
+    br
+    |     Vous trouverez en pièces jointes, vos échances de paiements ainsi que le contrat de location.

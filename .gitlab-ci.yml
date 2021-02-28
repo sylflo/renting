@@ -1,0 +1,163 @@
+image: node:15.7.0-alpine3.12
+
+stages:
+  - lint
+  - test
+  - build
+
+eslint-backend:
+  stage: lint
+  script:
+    - cd backend
+    - npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+    - npx eslint ./src --ext .js,.jsx,.ts,.tsx
+
+eslint-admin:
+  stage: lint
+  script:
+    - cd admin
+    - npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+    - npx eslint ./src --ext .js,.jsx,.ts,.tsx
+
+prettier-backend:
+  stage: lint
+  script:
+    - cd backend
+    - npx prettier --check ./src
+
+prettier-admin:
+  stage: lint
+  script:
+    - cd admin
+    - npx prettier --check ./src
+
+hadolint-backend:
+  stage: lint
+  image: hadolint/hadolint:latest-debian
+  script:
+    - cd backend
+    - hadolint Dockerfile
+
+hadolint-admin:
+  stage: lint
+  image: hadolint/hadolint:latest-debian
+  script:
+    - cd admin
+    - hadolint Dockerfile
+
+unittest-backend:
+  stage: test
+  image: registry.gitlab.com/sylflo/renting:backend-test
+  services:
+    - postgres:latest
+  variables:
+    POSTGRES_PASSWORD: rentingtest
+    POSTGRES_USER: rentingtest
+    POSTGRES_DB: rentingtest
+    DATABASE_DATA: postgresql://rentingtest:rentingtest@postgres/rentingtest
+    BASE_DIR: /builds/sylflo/renting/backend
+    BRAND_NAME: "My brand"
+    RENTING_ADDRESS: "Emile Zola, 75003 Paris"
+    LANDLORD_NAME: "John Doe"
+    LANDLORD_FIRST_NAME: "John"
+    LANDLORD_LAST_NAME: "Doe"
+    PHONE: "+3365861456"
+    MAX_PERSONS: 4
+  script:
+    - cd common
+    - npm i
+    - cd ../backend
+    - npm i
+    - npm run build
+    - node_modules/prisma/build/index.js migrate deploy --preview-feature
+    - node ./dist/commands/admin.js "test@test.fr" "test" "test"
+    - npm run test customers products seasons_rates seasons
+    - npm run test bookings/test_yup_schemas bookings/test_gql_endpoints bookings/test_emails bookings/test_periodic_tasks
+  artifacts:
+    paths:
+      - ./backend/files/contracts/contract_1.pdf
+      - ./backend/files/booking/1/deadline.pdf
+    expire_in: 1 day
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - common/node_modules
+      - backend/node_modules
+
+# cypress-run:
+#   services:
+#     postgres:
+#       image: postgres
+#       ports:
+#         - 5432:5432
+#       env:
+#         POSTGRES_PASSWORD: rentingtest
+#         POSTGRES_USER: rentingtest
+#         POSTGRES_DB: rentingtest
+#   runs-on: ubuntu-16.04
+#   steps:
+#     - name: Checkout
+#       uses: actions/checkout@v1
+#     - name: Run backend server
+#       run: |
+#         cd backend
+#         npm i
+#         node_modules/@prisma/cli/build/index.js migrate dev --preview-feature --name "Init"
+#         npm run generate
+#         npm run dev &
+#         sleep 5
+#       env:
+#         BASE_DIR: /Users/sylflo/Projects/renting/backend
+#         BRAND_NAME: "La Petite Maison Dans La Prairie"
+#         RENTING_ADDRESS: "Emile Zola, 75003 Paris"
+#         LANDLORD_NAME: "John Doe"
+#         DATABASE_DATA: "postgresql://rentingtest:rentingtest@0.0.0.0/rentingtest"
+#         MAX_PERSONS: 4
+#         SMTP_USER: ${{ secrets.SMTP_USER }}
+#         SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+#         STRIPE_SK: ${{ secrets.STRIPE_SK }}
+#     # Install NPM dependencies, cache them correctly
+#     # and run all Cypress tests
+#     - name: Cypress run
+#       uses: cypress-io/github-action@v2
+#       with:
+#         start: npm start
+#         working-directory: ./admin
+
+build-test:
+  stage: build
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build --tag $CI_REGISTRY_IMAGE:backend-test -f backend/Dockerfile.test  .
+    - docker push $CI_REGISTRY_IMAGE:backend-test
+  only:
+    - schedules
+
+build-backend:
+  stage: build
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-backend -f backend/Dockerfile  .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-backend
+  only:
+    - master
+
+build-admin:
+  stage: build
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-admin -f admin/Dockerfile  .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA-admin
+  only:
+    - master

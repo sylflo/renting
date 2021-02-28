@@ -1,0 +1,9 @@
+node_modules
+src/__tests__
+src/schemas/generated
+src/commands
+
+# TODO TO REMOVE DO NOT FORGET
+src/schemas/booking/stripes.ts
+src/periodic_tasks.ts
+src/schemas/utils.ts

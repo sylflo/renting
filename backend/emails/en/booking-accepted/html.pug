@@ -1,0 +1,11 @@
+extends ../shared/body.pug
+
+block title
+  | RENTAL CONFIRMATION
+
+block content
+  p
+    | We confirm that your reservation from #{dayjs(booking.start).format('LL')} to #{dayjs(booking.end).format('LL')} has been accepted.
+    br
+    br
+    |
