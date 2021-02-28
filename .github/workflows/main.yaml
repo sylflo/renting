@@ -39,3 +39,12 @@ jobs:
         run: |
           cd backend
           npx prettier --check ./src
+
+  prettier-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs prettier
+        run: |
+          cd admin
+          npx prettier --check ./src
