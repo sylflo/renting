@@ -64,7 +64,10 @@ jobs:
   
   unittest-backend:
     runs-on: ubuntu-latest
-    container: node:15.7.0-alpine3.12
+    container:
+      image: node:15.7.0-alpine3.12
+      volumes:
+        - /tmp/booking/:/__w/renting/renting/backend/files/booking/
     services:
       postgres:
         image: postgres
@@ -128,4 +131,4 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: deadline.pdf
-          path: /__w/renting/renting/backend/files/booking/1/deadline.pdf
+          path: /tmp/booking/1/deadline.pdf
