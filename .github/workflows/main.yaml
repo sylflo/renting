@@ -10,7 +10,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
-    build-docker-backend:
+  build-docker-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
