@@ -1,10 +1,15 @@
 import { mutate } from '../utils'
+import { prisma } from '../../context'
 import {
   CREATE_PRODUCT,
   UPDATE_PRODUCT,
 } from '../../common/grapql_schemas/products'
 
 const stripe = require('stripe')(process.env.STRIPE_SK)
+
+afterAll(async () => {
+  await prisma.$disconnect()
+})
 
 const createProduct = async (status, price: number) => {
   return mutate({
