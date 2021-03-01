@@ -1,0 +1,80 @@
+table(style='border-collapse:collapse' width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#e6ecef' align='center')
+  tbody
+    tr
+      td(height='35') &nbsp;
+    tr
+      td(width='100%' bgcolor='#e6ecef' align='center')
+        table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+          tbody
+            tr
+              td(width='100%' bgcolor='#FFFFFF' align='center')
+                span.im
+                  table(style='border-collapse:collapse' width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                    tbody
+                      tr
+                        td(style="color:#4267B2;font-size:16px;font-family:'Helvetica',Arial,sans-serif;text-decoration:none;letter-spacing:3px;text-transform:uppercase;padding-top:20px;padding-bottom:10px" width='100%' align='center')
+                          block title
+                            | TITLE
+                table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                  tbody
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        strong Bonjour #{ booking.customer.firstName } #{ booking.customer.lastName },
+                        br 
+                        br
+                        block content
+                          p
+                            | Nous vous confirmons que votre réservation du #{dayjs(booking.start).locale('fr').format('LL')} au #{dayjs(booking.end).locale('fr').format('LL')} a été acceptée.
+                            br
+                            br
+                            |     Vous trouverez en pièces jointes, vos échances de paiements ainsi que le contrat de location.
+                  
+                table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                  tbody
+                    if accepted
+                      tr
+                        td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                          div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                            img.CToWUd(src='https://ci4.googleusercontent.com/proxy/3tnhJYRq0rRY4q5HvSylkF7ks47qegejWwIvnWug6-Y8QiP8ba27Zr7SD2yb-Tx2fmTPtpdoWUH3AntYX_7Qk0r1OM9Dq-IBE02Tb0U3E9xv3A=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_map.png' alt='ic_map' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                            | Lieu - 
+                            span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ location }
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci6.googleusercontent.com/proxy/qyQ8gCmCv-GBinumBm-NERvsSjVlnCSheW1ctxUVcSiZgUJRH3GM_mTejkLaXukVJI4UiQlRvTD0B_kOGx_ftxNOcObnjlBObbMKXGAN16MjX4rqDi1DKTI=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_date_range.png' alt='ic_date_range' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | D&eacute;but - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{dayjs(booking.start).locale('fr').format('LL')}
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci6.googleusercontent.com/proxy/qyQ8gCmCv-GBinumBm-NERvsSjVlnCSheW1ctxUVcSiZgUJRH3GM_mTejkLaXukVJI4UiQlRvTD0B_kOGx_ftxNOcObnjlBObbMKXGAN16MjX4rqDi1DKTI=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_date_range.png' alt='ic_date_range' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Fin - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{dayjs(booking.end).locale('fr').format('LL')}
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci3.googleusercontent.com/proxy/YN8ziGSToolbpQtmA3jekERDB8Rb9b8QUiipdR_lDZg-ft9dbMffZTjqvcOXCikB4FE5E2RATThCNXB8lGfjJCH_nGH4LFOCKjGGNVNBK2atLhci4JjG=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_duration.png' alt='ic_duration' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Dur&eacute;e - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ booking.duration } jours
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci4.googleusercontent.com/proxy/NrA72hFCGJ_H_1jpCh_Mg22c4Vys_hk8AKqx6RZCuE6-IIRbtrVzGtVbPGXeAc0NCVyvCLv9afDZW4RG46Iq6BgNdP8ITlQufzgByoT7Royw1h8=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_star.png' alt='ic_star' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Prix total - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ booking.totalPrice }
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci6.googleusercontent.com/proxy/pLsZVIN5fHvcPzyObKhvj7A0cnNs0TDN9V4qgLknj0WdfYKarWb4Y98QsogWZp-s08gxxa-y0-y3MoKMHkq7EJnjljk5g-6lKxKMdQzgyCoFVQ6vDLR9jXcl70rJDKkgxA5mJAE=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_account_balance_wallet.png' alt='ic_account_balance_wallet' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Nettoyage - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ booking.cleaning ? "Oui" : "Non" }
+                
+                table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                  tbody
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        p
+                          | &Agrave; bient&ocirc;t,
+                          br
+                          br
+                          |     L'équipe de #{brand_name}

@@ -1,0 +1,74 @@
+doctype 5
+html(xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr")
+    head
+        meta(charset="utf-8")
+        style(type="text/css").
+            h1 {
+                text-align: center;
+            }
+            .underline {
+                text-decoration: underline;
+            }
+            .right {
+                text-align: right;
+            }
+            .container {
+                margin: auto;
+            }
+
+
+div.container
+    h1 CONTRAT DE LOCATION SAISONNIERE
+
+    table(style='width:100%')
+        tr
+            td Nom: #{landlord.lastName}
+            td.right Prénom: #{landlord.firstName}
+
+
+    p Adresse: #{landlord.address}
+    p Téléphone: #{landlord.phone}
+
+    p.underline Dénommé le bailleur d'une part
+
+
+    table(style='width:100%')
+        tr
+            td Nom: #{booking.customer.lastName}
+            td.right Prénom: #{booking.customer.firstName}
+        tr
+            td Téléphone: #{booking.customer.phone}
+            td.right Email: #{booking.customer.email}
+        tr
+            td Adresse: #{booking.customer.address.line1} #{booking.customer.address.line2}, #{booking.customer.address.postalCode} #{booking.customer.address.city}, #{booking.customer.address.country}
+
+
+    p.underline Dénommé le preneur d'autre part
+
+    p Il a été convenu d'une location saisonnière pour la période
+        ul
+            li du: #{dayjs(booking.start).format('DD/MM/YYYY')}
+            li au: #{dayjs(booking.end).format('DD/MM/YYYY')}
+        
+    p Adresse de location: #{renting_address}
+
+    p Montant du loyer (charges comprises): #{booking.totalPrice} euros
+
+    // p Les arrhes sont de 30% à la réservation soit 180 euros
+
+    p Le solde de 400 euros ainsi qu'un dépôt de garantie de: 200 euros devront être versés le jour de la remise des clés soit le #{dayjs(booking.start).locale('fr').format('LL')}
+
+    p L'heure d'arrivée est normalement prévue le samedi après-midi à 16 heures.
+
+    p L'heure de départ est normalement prévu le samedi à 10h.
+
+    p Fait en deux exemplaires à SAINT CHAMASSY le #{dayjs().locale('fr').format('LL')}
+
+
+    table(style='width:100%')
+        tr
+            td Le bailleur
+            td.right Le locataire
+        tr
+            td #{landlord.lastName} #{landlord.firstName}
+            td.right lu et approvué

@@ -1,0 +1,9 @@
+extends ../shared/body.pug
+
+block title
+  | ANNULATION DE LOCATION
+
+block content
+  p
+    | Nous sommes au regret de vous annocer que votre réservation du #{dayjs(booking.start).locale('fr').format('LL')} au #{dayjs(booking.end).locale('fr').format('LL')} a été annulée.
+    br

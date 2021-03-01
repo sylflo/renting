@@ -1,0 +1,143 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_DATA")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["createMany"]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ProductStatus {
+  SECURITY_DEPOSIT
+  CLEANING
+}
+
+model Product {
+  id              Int @id @default(autoincrement())
+  price           Int
+  status          ProductStatus @unique
+  stripePriceId   String?
+}
+
+enum TitleRate {
+  VERY_LOW_SEASON
+  LOW_SEASON
+  MIDDLE_SEASON
+  HIGH_SEASON
+}
+
+model SeasonRate {
+  id                            Int @id @default(autoincrement())
+  title                         TitleRate
+  year                          Int
+  name                          String? @unique
+  week                          Int
+  night                         Int
+  weekend                       Int
+  minimumDuration               Int
+  color                         String
+  seasons                       Season[]
+  stripePriceIdWeekDeposit      String?
+  stripePriceIdWeekendDeposit   String?
+  stripePriceIdNightDeposit     String?
+  stripePriceIdWeekRemaining    String?
+  stripePriceIdWeekendRemaining String?
+  stripePriceIdNightRemaining   String?
+}
+
+model Season {
+  id            Int     @id @default(autoincrement())
+  seasonRateId  Int?
+  date          DateTime @unique
+  start         Boolean @default(false)
+  end           Boolean @default(false)
+  isBooked      Boolean @default(false)
+  rate          SeasonRate? @relation(fields: [seasonRateId], references: [id])
+}
+
+model Address {
+  id          Int @id @default(autoincrement())
+  line1       String
+  line2       String?   
+  postalCode  String
+  city        String
+  country     String
+  customerId  Int?
+  customer    Customer?  @relation(fields:  [customerId], references: [id])
+}
+
+model Customer {
+  id              Int @id @default(autoincrement())
+  firstName       String
+  lastName        String
+  email           String @unique
+  phone           String @unique
+  language        String
+  stripeCustomer  String?
+  bookings        Booking[]
+  address         Address?
+}
+
+enum BookingStatus {
+  PENDING_CONFIRMATION
+  ACCEPTED
+  DEPOSIT_SENT
+  REMAINING_BOOKING_SENT
+  IN_RENTING
+  RENTING_FINISHED
+  CANCELLED
+}
+
+
+model Booking {
+  id                        Int     @id @default(autoincrement())
+  customerId                Int
+  paymentByCard             Boolean? @default(true)
+  status                    BookingStatus @default(PENDING_CONFIRMATION)
+  start                     DateTime
+  end                       DateTime
+  acceptedAt                DateTime?
+  duration                  Int?
+  totalPrice                Int?
+  cleaning                  Boolean
+  message                   String
+  totalAdults               Int
+  totalKids                 Int
+  customer                  Customer @relation(fields: [customerId], references: [id])
+  stripeInvoiceDeposit      String?
+  stripeInvoiceRemaining    String?
+  stripeInvoiceArrival      String?
+}
+
+enum ActivityType {
+  RESTAURANT
+  ACTIVITIES
+}
+
+model Activity {
+  id            Int @id @default(autoincrement())
+  titleFr       String
+  descriptionFr String
+  titleEn       String
+  descriptionEn String
+  image         String
+  type          ActivityType
+}
+
+model Amenity {
+  id            Int @id @default(autoincrement())
+  titleFr       String
+  descriptionFr String
+  titleEn       String
+  descriptionEn String
+}

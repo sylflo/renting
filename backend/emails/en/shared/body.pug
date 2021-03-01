@@ -1,0 +1,80 @@
+table(style='border-collapse:collapse' width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#e6ecef' align='center')
+  tbody
+    tr
+      td(height='35') &nbsp;
+    tr
+      td(width='100%' bgcolor='#e6ecef' align='center')
+        table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+          tbody
+            tr
+              td(width='100%' bgcolor='#FFFFFF' align='center')
+                span.im
+                  table(style='border-collapse:collapse' width='100%' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                    tbody
+                      tr
+                        td(style="color:#4267B2;font-size:16px;font-family:'Helvetica',Arial,sans-serif;text-decoration:none;letter-spacing:3px;text-transform:uppercase;padding-top:20px;padding-bottom:10px" width='100%' align='center')
+                          block title
+                            | RENTAL CONFIRMATION
+                table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                  tbody
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        strong Hello #{ booking.customer.firstName } #{ booking.customer.lastName },
+                        br 
+                        br
+                        block content
+                          p
+                            | We confirm that your reservation from #{dayjs(booking.start).format('LL')} to #{dayjs(booking.end).format('LL')} has been accepted.
+                            br
+                            br
+                            |     You will find in attachments, your payment deadlines as well as the rental contract.
+                  
+                table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                  tbody
+                    if accepted
+                      tr
+                        td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                          div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                            img.CToWUd(src='https://ci4.googleusercontent.com/proxy/3tnhJYRq0rRY4q5HvSylkF7ks47qegejWwIvnWug6-Y8QiP8ba27Zr7SD2yb-Tx2fmTPtpdoWUH3AntYX_7Qk0r1OM9Dq-IBE02Tb0U3E9xv3A=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_map.png' alt='ic_map' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                            | Location - 
+                            span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ location }
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci6.googleusercontent.com/proxy/qyQ8gCmCv-GBinumBm-NERvsSjVlnCSheW1ctxUVcSiZgUJRH3GM_mTejkLaXukVJI4UiQlRvTD0B_kOGx_ftxNOcObnjlBObbMKXGAN16MjX4rqDi1DKTI=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_date_range.png' alt='ic_date_range' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Start - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{dayjs(booking.start).format('LL')}
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci6.googleusercontent.com/proxy/qyQ8gCmCv-GBinumBm-NERvsSjVlnCSheW1ctxUVcSiZgUJRH3GM_mTejkLaXukVJI4UiQlRvTD0B_kOGx_ftxNOcObnjlBObbMKXGAN16MjX4rqDi1DKTI=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_date_range.png' alt='ic_date_range' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | End - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{dayjs(booking.end).format('LL')}
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci3.googleusercontent.com/proxy/YN8ziGSToolbpQtmA3jekERDB8Rb9b8QUiipdR_lDZg-ft9dbMffZTjqvcOXCikB4FE5E2RATThCNXB8lGfjJCH_nGH4LFOCKjGGNVNBK2atLhci4JjG=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_duration.png' alt='ic_duration' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Duration - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ booking.duration } days
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci4.googleusercontent.com/proxy/NrA72hFCGJ_H_1jpCh_Mg22c4Vys_hk8AKqx6RZCuE6-IIRbtrVzGtVbPGXeAc0NCVyvCLv9afDZW4RG46Iq6BgNdP8ITlQufzgByoT7Royw1h8=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_star.png' alt='ic_star' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Total price - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ booking.totalPrice }
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        div(style="line-height:24px;font-size:18px;font-family:'Graphik Regular','Helvetica';font-weight:400")
+                          img.CToWUd(src='https://ci6.googleusercontent.com/proxy/pLsZVIN5fHvcPzyObKhvj7A0cnNs0TDN9V4qgLknj0WdfYKarWb4Y98QsogWZp-s08gxxa-y0-y3MoKMHkq7EJnjljk5g-6lKxKMdQzgyCoFVQ6vDLR9jXcl70rJDKkgxA5mJAE=s0-d-e1-ft#https://storage.googleapis.com/cremedelacreme/emails/ic_account_balance_wallet.png' alt='ic_account_balance_wallet' style='max-width:18px;max-height:18px;margin-right:10px;vertical-align:text-top')
+                          | Cleaning - 
+                          span(style="font-family:'Graphik Medium','Helvetica';font-weight:500") #{ booking.cleaning ? "Yes" : "No" }
+                
+                table(style='border-collapse:collapse' width='600' cellspacing='0' cellpadding='0' border='0' bgcolor='#FFFFFF' align='center')
+                  tbody
+                    tr
+                      td(style="font-size:14px;font-family:'Helvetica',Arial,sans-serif;color:#6d6d6d;line-height:1.5;text-align:left;padding-top:20px;padding-left:40px;padding-right:40px" width='100%' align='left')
+                        p
+                          | See you soon,
+                          br
+                          br
+                          |     The team of #{brand_name}

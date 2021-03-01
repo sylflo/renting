@@ -1,0 +1,10 @@
+files/booking/deadlines/invoice.html
+files/contracts
+node_modules/
+src/generated/
+src/schemas/generated
+src/schema.graphql
+src/commands/resources/
+prisma/dev.db
+dist/
+*.env*
