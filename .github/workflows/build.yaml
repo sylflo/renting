@@ -1,9 +1,15 @@
 name: build
 
+# on:
+#   workflow_dispatch:
+#   workflow_run:
+#     workflows: ["unit-tests"]
+#     types: 
+#       - completed
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["unit-tests"]
+    workflows: ["linting"]
     branches: ["**"]
     types: 
       - completed
