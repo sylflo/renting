@@ -1,16 +1,10 @@
 name: Publish Releases to Docker Hub
 
-# on:
-#   push:
-#     branches: [ 'ci-tag-correction' ]
-#     tags:
-#       - "v*.*.*"
 on:
-  # Triggers the workflow on push or pull request events
   push:
-    branches: [ "**" ]
-  pull_request:
-    branches: [ "**" ]
+    branches: [ 'ci-tag-correction' ]
+    tags:
+      - "v*.*.*"
 jobs:
   build-and-push-docker-backend:
     runs-on: ubuntu-latest

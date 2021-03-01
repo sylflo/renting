@@ -1,63 +1,63 @@
-# name: linting
+name: linting
 
-# # Controls when the action will run. 
-# on:
-#   # Triggers the workflow on push or pull request events
-#   push:
-#     branches: [ "**" ]
-#   pull_request:
-#     branches: [ "**" ]
-#   workflow_dispatch:
-# jobs:
-#   eslint-backend:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Runs eslint
-#         run: |
-#           cd backend
-#           npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
-#           npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
-#   eslint-admin:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Runs eslint
-#         run: |
-#           cd admin
-#           npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
-#           npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+  workflow_dispatch:
+jobs:
+  eslint-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs eslint
+        run: |
+          cd backend
+          npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+          npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
+  eslint-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs eslint
+        run: |
+          cd admin
+          npm i eslint typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin
+          npx eslint --max-warnings=0 ./src --ext .js,.jsx,.ts,.tsx
 
-#   prettier-backend:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Runs prettier
-#         run: |
-#           cd backend
-#           npx prettier --check ./src
+  prettier-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs prettier
+        run: |
+          cd backend
+          npx prettier --check ./src
 
-#   prettier-admin:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Runs prettier
-#         run: |
-#           cd admin
-#           npx prettier --check ./src
+  prettier-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Runs prettier
+        run: |
+          cd admin
+          npx prettier --check ./src
 
-#   hadolint-backend:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: brpaz/hadolint-action@v1.2.1
-#         with:
-#           dockerfile: ./backend/Dockerfile
+  hadolint-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./backend/Dockerfile
 
-#   hadolint-admin:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: brpaz/hadolint-action@v1.2.1
-#         with:
-#           dockerfile: ./admin/Dockerfile
+  hadolint-admin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: brpaz/hadolint-action@v1.2.1
+        with:
+          dockerfile: ./admin/Dockerfile
