@@ -53,7 +53,7 @@ jobs:
           touch toto.txt
           ls -al
           pwd
-          ls -al /__w/renting/renting/common/package.json
+          ls -al /__w/renting/common/package.json
       # - name: Run unit tests
       #   run: |
       #     cd common
@@ -90,4 +90,4 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: package.json
-          path: /__w/renting/renting/common/
+          path: /__w/renting/common/
