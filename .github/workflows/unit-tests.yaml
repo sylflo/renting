@@ -3,7 +3,7 @@ name: unit-tests
 # on:
 #   workflow_dispatch:
 #   workflow_run:
-#     workflows: ["CI"]
+#     workflows: ["linting"]
 #     branches: ["**"]
 #     types: 
 #       - completed
@@ -87,5 +87,5 @@ jobs:
       #     path: /tmp/files/contracts/contract_1.pdf
       - uses: actions/download-artifact@v2
         with:
-          # name: toto.txt
+          name: toto.txt
           path: /__w/renting/renting/common/
