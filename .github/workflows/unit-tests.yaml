@@ -1,0 +1,69 @@
+name: unit-tests
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["linting"]
+    branches: ["**"]
+    types: 
+      - completed
+jobs:
+  unittest-backend:
+    runs-on: ubuntu-latest
+    container:
+      image: node:15.7.0-alpine3.12
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: rentingtest
+          POSTGRES_USER: rentingtest
+          POSTGRES_DB: rentingtest
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    env:
+      DATABASE_DATA: postgresql://rentingtest:rentingtest@postgres/rentingtest
+      BASE_DIR: /__w/renting/renting/backend
+      STRIPE_SK: ${{ secrets.STRIPE_SK }}
+      BRAND_NAME: "My brand"
+      RENTING_ADDRESS: "Emile Zola, 75003 Paris"
+      LANDLORD_NAME: "John Doe"
+      LANDLORD_FIRST_NAME: "John"
+      LANDLORD_LAST_NAME: "Doe"
+      PHONE: "+3365861456"
+      MAX_PERSONS: 4
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run unit tests
+        run: |
+          cd common
+          npm i
+          cd ../backend
+          apk --no-cache --upgrade add \
+            gcc \
+            musl-dev \
+            jpeg-dev \
+            zlib-dev \
+            libffi-dev \
+            cairo-dev \
+            pango-dev \
+            gdk-pixbuf \
+            python3-dev \
+            py3-pip \
+            fontconfig \
+            ttf-dejavu \
+            postgresql-client \
+            nano
+          pip3 --no-cache-dir install wheel
+          pip3 --no-cache-dir install WeasyPrint
+          npm i
+          npm run build
+          node_modules/prisma/build/index.js migrate deploy --preview-feature
+          node ./dist/commands/admin.js "test@test.fr" "test" "test"
+          npm run test customers products seasons_rates seasons
+          npm run test bookings/test_yup_schemas bookings/test_gql_endpoints bookings/test_emails bookings/test_periodic_tasks
