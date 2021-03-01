@@ -18,8 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:15.7.0-alpine3.12
+      # options: -v /tmp/package.json:/__w/renting/renting/common/package.json
       volumes:
-        - /tmp/package.json:/__w/renting/renting/common/package.json
+        - /tmp/package.json:/__w/renting/renting/common/package.json:r
     services:
       postgres:
         image: postgres
