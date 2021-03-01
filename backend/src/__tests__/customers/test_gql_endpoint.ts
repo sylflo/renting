@@ -13,7 +13,6 @@ afterAll(async () => {
   await prisma.$disconnect()
 })
 
-
 const stripe = require('stripe')(process.env.STRIPE_SK)
 describe('Customers endpoints', () => {
   it('creates a customer', async () => {
