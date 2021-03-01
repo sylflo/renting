@@ -58,7 +58,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=sylflo/renting-backend
+          DOCKER_IMAGE=sylflo/renting-admin
           VERSION=${GITHUB_REF#refs/tags/v}
           TAGS="${DOCKER_IMAGE}:${VERSION}"
           if [[ $VERSION =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
