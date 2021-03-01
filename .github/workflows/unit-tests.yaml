@@ -19,7 +19,7 @@ jobs:
     container:
       image: node:15.7.0-alpine3.12
       volumes:
-        - /tmp/files/:/renting/renting/backend/files
+        - /tmp/package.json:/__w/renting/renting/common/package.json
     services:
       postgres:
         image: postgres
@@ -90,4 +90,4 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: package.json
-          path: /__w/renting/renting/common/
+          path: /tmp/
