@@ -4,7 +4,16 @@ This project lets you manage a seasonal renting for a property.
 
 ## Demo
 
-You can access a demo here https://demotoDo.com
+You can access a demo here https://house-renting.io
+
+The credentials are:
+  - email: test@test.com
+  - password: test
+
+**Remarks**:
+
+- emails are not sent
+- data are clear reguraly 
 
 ## How to use
 
