@@ -15,6 +15,7 @@
   "dependencies": {
     "@prisma/client": "~2.17.0",
     "@sentry/node": "^6.1.0",
+    "@types/node": "^12.19.4",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-context": "^1.0.20",
@@ -32,13 +33,12 @@
     "jsonwebtoken": "^8.5.1",
     "nexus": "^1.0.0",
     "nexus-plugin-prisma": "^0.31.0",
+    "prisma": "~2.17.0",
     "pug": "^3.0.0",
     "stripe": "^8.134.0",
     "ts-node-dev": "1.0.0-pre.50",
     "typescript": "^4.1.5",
-    "yup": "^0.31.0",
-    "prisma": "~2.17.0",
-    "@types/node": "^12.19.4"
+    "yup": "^0.31.0"
   },
   "devDependencies": {
     "@apollo/client": "^3.3.9",
